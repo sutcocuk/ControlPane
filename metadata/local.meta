@@ -1,0 +1,101 @@
+[app/ui]
+version = 10.0.0
+modtime = 1766760217.185598000
+
+[app/launcher]
+version = 10.0.0
+modtime = 1766760217.187442000
+
+[macros/HF_SUF_hosts]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = nobody
+version = 10.0.0
+modtime = 1766760463.054190000
+
+[macros/klantnaam]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = nobody
+version = 10.0.0
+modtime = 1766760467.730635000
+
+[app/install/install_source_checksum]
+version = 10.0.0
+modtime = 1766761257.730694000
+
+[savedsearches/Bundle%20Replication%20Failure]
+version = 10.0.0
+modtime = 1766767752.787250000
+
+[savedsearches/Cold_Storage_vol]
+version = 10.0.0
+modtime = 1766767765.688228000
+
+[savedsearches/Cribl%20failed%20task%20execution]
+version = 10.0.0
+modtime = 1766767800.954109000
+
+[savedsearches/Datamodel%20Partitie%20volume%20treshold%20exceeded]
+version = 10.0.0
+modtime = 1766767820.433920000
+
+[savedsearches/Indexer_Issue]
+version = 10.0.0
+modtime = 1766767840.292968000
+
+[savedsearches/Indexer_Queue_vol]
+version = 10.0.0
+modtime = 1766767860.163296000
+
+[savedsearches/Internal_Errors]
+version = 10.0.0
+modtime = 1766767878.894456000
+
+[savedsearches/Lookup%20assets.csv%20geshared]
+version = 10.0.0
+modtime = 1766767895.185046000
+
+[savedsearches/Macro%20waardes%20toevoegen]
+version = 10.0.0
+modtime = 1766767917.021302000
+
+[savedsearches/Mem%20OR%20Cpu%20Usage%20%3E%2085%25%20%28p90%29]
+version = 10.0.0
+modtime = 1766767935.081000000
+
+[savedsearches/Replicatie_Failure]
+version = 10.0.0
+modtime = 1766767950.418167000
+
+[savedsearches/Splunk%20HF%27s%2FSUF%27s%20are%20down]
+version = 10.0.0
+modtime = 1766767967.272133000
+
+[savedsearches/Splunk%20core%20servers%20are%20down]
+version = 10.0.0
+modtime = 1766767981.661475000
+
+[savedsearches/alerting%20skipped%20searches]
+version = 10.0.0
+modtime = 1766767996.425980000
+
+[savedsearches/Abnormal%20State%20of%20Indexer%20Processor]
+owner = admin
+version = 10.0.0
+modtime = 1766768505.094781000
+
+[savedsearches/Critical%20System%20Physical%20Memory%20Usage]
+owner = admin
+version = 10.0.0
+modtime = 1766768520.948191000
+
+[savedsearches/Expired%20and%20Soon%20To%20Expire%20Licenses]
+owner = admin
+version = 10.0.0
+modtime = 1766768540.509096000
+
+[savedsearches/Total%20License%20Usage%20Near%20Daily%20Quota]
+owner = admin
+version = 10.0.0
+modtime = 1766768565.425157000
