@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VERSION: 1.0.1
+      VERSION: 1.0.1  # You can dynamically set this if you want
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -40,11 +40,14 @@ jobs:
 
       - name: Package add-on
         run: |
+          mkdir -p packages
           mkdir -p app-dir
           ucc-gen package --path output/ControlPane -o app-dir/
+          # Move the .spl file to packages/ preserving version
+          mv app-dir/ControlPane/*.spl packages/
 
-      - name: Upload artifact
+      - name: Upload packages
         uses: actions/upload-artifact@v4
         with:
-          name: ControlPane
-          path: app-dir/*.spl
+          name: spl-packages
+          path: packages/*.spl
