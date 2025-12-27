@@ -45,7 +45,8 @@ jobs:
             echo "  \"version\": \"${VERSION}\"," >> app.manifest
             echo "  \"author\": \"Mustafa\"," >> app.manifest
             echo "  \"description\": \"ControlPane add-on for Splunk\"," >> app.manifest
-            echo "  \"supportedDeployments\": [\"_distributed\"]" >> app.manifest
+            echo "  \"supportedDeployments\": [\"_distributed\"]," >> app.manifest
+            echo "  \"targetWorkloads\": [\"_indexers\", \"_search_heads\"]" >> app.manifest
             echo "}" >> app.manifest
           else
             echo "app.manifest already exists, updating version"
