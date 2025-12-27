@@ -21,15 +21,13 @@ jobs:
           python-version: '3.9'
 
       - name: Install Splunk Packaging Toolkit
-        run: |
-          pip install splunk-packaging-toolkit
+        run: pip install splunk-packaging-toolkit
 
       - name: Package Splunk app
-        run: |
-          slim package .
+        run: slim package .
 
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
           name: splunk-app
-          path: "*.tgz"
+          path: target/*.tgz
