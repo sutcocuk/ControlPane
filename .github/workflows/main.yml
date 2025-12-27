@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VERSION: 1.0.1  # You can dynamically set this if you want
+      VERSION: 1.0.1  # Change as needed for new versions
 
     steps:
       - name: Checkout repository
@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install UCC Generator
+      - name: Install UCC Framework
         run: |
           python -m pip install --upgrade pip
           pip install splunk-add-on-ucc-framework
@@ -34,20 +34,16 @@ jobs:
         run: |
           ucc-gen build --source .
 
-      - name: Copy manifest into build output
-        run: |
-          cp app.manifest output/ControlPane/app.manifest
-
       - name: Package add-on
         run: |
           mkdir -p packages
           mkdir -p app-dir
           ucc-gen package --path output/ControlPane -o app-dir/
-          # Move the .spl file to packages/ preserving version
-          mv app-dir/ControlPane/*.spl packages/
+          # Move the .tar.gz package to packages folder
+          mv app-dir/ControlPane/*.tar.gz packages/
 
       - name: Upload packages
         uses: actions/upload-artifact@v4
         with:
           name: spl-packages
-          path: packages/*.spl
+          path: packages/*.tar.gz
