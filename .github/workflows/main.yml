@@ -1,67 +1,11 @@
-name: build-test-release
-
-on:
-  push:
-    branches:
-      - main
-      - 'ex*'
-    tags:
-      - 'v*'
+name: Build My Splunk App
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      VERSION: 1.0.1
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Create output and app directories
-        run: |
-          mkdir -p output/ControlPane
-          mkdir -p app-dir
-          mkdir -p packages
-
-      - name: Install UCC and packaging toolkit
-        run: |
-          pip install splunk-add-on-ucc-framework
-          pip install splunk-packaging-toolkit
-
-      # ✅ Generate valid app.manifest for UCC
-      - name: Ensure app.manifest exists
-        run: |
-          cat <<EOF > output/ControlPane/app.manifest
-{
-  "schemaVersion": "2.0.0",
-  "info": {
-    "id": {
-      "name": "ControlPane",
-      "version": "${VERSION}"
-    },
-    "title": "ControlPane",
-    "description": "ControlPane add-on for Splunk",
-    "author": [{"name": "Mustafa"}]
-  },
-  "supportedDeployments": ["_distributed"],
-  "targetWorkloads": ["splunk_enterprise"]
-}
-EOF
-
-      # ✅ Build the add-on
-      - name: Build the add-on using UCC
-        run: ucc-gen build --source .
-
-      # ✅ Package the add-on
-      - name: Package the add-on
-        run: |
-          ucc-gen package --path output/ControlPane -o app-dir/
-          mv app-dir/ControlPane/*.tar.gz packages/
-
-      # ✅ Upload the package(s) as artifact
-      - name: Upload packages
-        uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v5
+      - uses: VatsalJagani/splunk-app-action@v5
         with:
-          name: splunk-packages
-          path: packages/
+          app_dir: "my_app"
