@@ -44,12 +44,12 @@ jobs:
             echo "  \"name\": \"ControlPane\"," >> app.manifest
             echo "  \"version\": \"${VERSION}\"," >> app.manifest
             echo "  \"author\": \"Mustafa\"," >> app.manifest
-            echo "  \"description\": \"ControlPane add-on for Splunk\"" >> app.manifest
+            echo "  \"description\": \"ControlPane add-on for Splunk\"," >> app.manifest
+            echo "  \"supportedDeployments\": [\"SplunkEnterprise\"]" >> app.manifest
             echo "}" >> app.manifest
           else
             echo "app.manifest already exists, updating version"
             jq --arg ver "${VERSION}" '.version = $ver' app.manifest > app.tmp && mv app.tmp app.manifest
-          fi
 
       # 5️⃣ Build the app using UCC
       - name: Build the app using UCC
