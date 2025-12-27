@@ -1,33 +1,35 @@
-name: build-package
+name: build-test-release
 
-on:
-  push:
-    branches:
+on: 
+  push: 
+    branches: 
       - main
-    tags:
+      - 'ex*'
+    tags: 
       - 'v*'
 
 jobs:
-  package:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install splunk-add-on-ucc-framework splunk-packaging-toolkit
 
-      - name: Install Splunk Packaging Toolkit
-        run: pip install splunk-packaging-toolkit
+      - name: Build the app using UCC
+        run: ucc-gen build
 
-      - name: Package Splunk app
-        run: slim package .
+      - name: Package the app
+        run: |
+          mkdir -p app-dir
+          ucc-gen package --path output/ControlPane -o app-dir/
 
-      - name: Upload package
+      - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: splunk-app
-          path: target/*.tgz
+          name: my-package
+          path: app-dir
