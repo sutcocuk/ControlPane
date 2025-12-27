@@ -1,10 +1,11 @@
 {
   "schemaVersion": "2.0.0",
   "info": {
+    "title": "ControlPane",
     "id": {
       "name": "ControlPane"
     },
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Mustafa",
     "description": "ControlPane add-on for Splunk"
   },
