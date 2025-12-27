@@ -3,7 +3,8 @@
   "info": {
     "title": "ControlPane",
     "id": {
-      "name": "ControlPane"
+      "name": "ControlPane",
+      "version": "1.0.1"
     },
     "version": "1.0.1",
     "author": "Mustafa",
