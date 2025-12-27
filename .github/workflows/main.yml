@@ -27,10 +27,8 @@ jobs:
       - name: Determine app version
         id: version
         run: |
-          # Base version
           MAJOR=1
           MINOR=0
-          # Use commit count as patch version
           PATCH=$(git rev-list --count HEAD)
           VERSION="$MAJOR.$MINOR.$PATCH"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
@@ -41,18 +39,15 @@ jobs:
         run: |
           if [ ! -f app.manifest ]; then
             echo "Creating app.manifest"
-            cat <<EOF > app.manifest
-{
-  "name": "ControlPane",
-  "version": "${{ env.VERSION }}",
-  "author": "Mustafa",
-  "description": "ControlPane add-on for Splunk"
-}
-EOF
+            echo "{" > app.manifest
+            echo "  \"name\": \"ControlPane\"," >> app.manifest
+            echo "  \"version\": \"${VERSION}\"," >> app.manifest
+            echo "  \"author\": \"Mustafa\"," >> app.manifest
+            echo "  \"description\": \"ControlPane add-on for Splunk\"" >> app.manifest
+            echo "}" >> app.manifest
           else
             echo "app.manifest already exists, updating version"
-            jq --arg ver "${{ env.VERSION }}" '.version = $ver' app.manifest > app.tmp && mv app.tmp app.manifest
-          fi
+            jq --arg ver "${VERSION}" '.version = $ver' app.manifest > app.tmp && mv app.tmp app.manifest
 
       # 5️⃣ Build the app using UCC
       - name: Build the app using UCC
