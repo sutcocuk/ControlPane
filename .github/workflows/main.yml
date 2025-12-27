@@ -13,59 +13,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # 2️⃣ Install Python dependencies
-      - name: Install Python dependencies
+      # 2️⃣ Install UCC
+      - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install splunk-add-on-ucc-framework splunk-packaging-toolkit jq
+          pip install splunk-add-on-ucc-framework splunk-packaging-toolkit
 
-      # 3️⃣ Determine app version dynamically
-      - name: Determine app version
-        id: version
-        run: |
-          MAJOR=1
-          MINOR=0
-          PATCH=$(git rev-list --count HEAD)
-          VERSION="$MAJOR.$MINOR.$PATCH"
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Determined app version: $VERSION"
-
-      # 4️⃣ Create or update app.manifest
-      - name: Ensure app.manifest exists
-        run: |
-          if [ ! -f app.manifest ]; then
-            echo "Creating app.manifest"
-            echo "{" > app.manifest
-            echo "  \"schemaVersion\": \"2.0.0\"," >> app.manifest
-            echo "  \"name\": \"ControlPane\"," >> app.manifest
-            echo "  \"version\": \"${VERSION}\"," >> app.manifest
-            echo "  \"author\": \"Mustafa\"," >> app.manifest
-            echo "  \"description\": \"ControlPane add-on for Splunk\"," >> app.manifest
-            echo "  \"supportedDeployments\": [\"_distributed\"]," >> app.manifest
-            echo "  \"targetWorkloads\": [\"_indexers\", \"_search_heads\"]" >> app.manifest
-            echo "}" >> app.manifest
-          else
-            echo "app.manifest already exists, updating version"
-            jq --arg ver "${VERSION}" '.version = $ver' app.manifest > app.tmp && mv app.tmp app.manifest
-          fi
-
-      # 5️⃣ Build the app using UCC
-      - name: Build the app using UCC
+      # 3️⃣ Build using UCC
+      - name: Build app
         run: ucc-gen build --source .
 
-      # 6️⃣ Package the app
-      - name: Package the app
+      # 4️⃣ Package app
+      - name: Package app
         run: |
           mkdir -p app-dir
           ucc-gen package --path output/ControlPane -o app-dir/
 
-      # 7️⃣ Upload the packaged artifact
-      - name: Upload package artifact
+      # 5️⃣ Upload artifact
+      - name: Upload package
         uses: actions/upload-artifact@v4
         with:
-          name: my-package
+          name: ControlPane
           path: app-dir
