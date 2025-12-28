@@ -11,5 +11,5 @@ jobs:
       - name: Build & Inspect Splunk App
         uses: VatsalJagani/splunk-app-action@v5
         with:
-          app_dir: controlpane
+          app_dir: ControlPane
           local_app_inspect: true
