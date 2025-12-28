@@ -1,4 +1,5 @@
 name: Build with Local Inspect
+
 on: [push]
 
 jobs:
@@ -6,7 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: VatsalJagani/splunk-app-action@v5
+
+      - name: Splunk App Build & Inspect
+        uses: VatsalJagani/splunk-app-action@v5
         with:
-          app_dir: "controlpane"
+          app-path: controlpane
           local_app_inspect: true
