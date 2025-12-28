@@ -8,8 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Splunk App Build & Inspect
+      - name: Build & Inspect Splunk App
         uses: VatsalJagani/splunk-app-action@v5
         with:
-          app-path: controlpane
+          app_dir: controlpane
           local_app_inspect: true
