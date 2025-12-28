@@ -1,4 +1,4 @@
-name: Build My Splunk App
+name: Build with Local Inspect
 on: [push]
 
 jobs:
@@ -9,3 +9,4 @@ jobs:
       - uses: VatsalJagani/splunk-app-action@v5
         with:
           app_dir: "my_app"
+          local_app_inspect: true
