@@ -1,5 +1,4 @@
 name: Build with Local Inspect
-
 on: [push]
 
 jobs:
@@ -8,8 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Build & Inspect Splunk App
-        uses: VatsalJagani/splunk-app-action@v5
+      - uses: VatsalJagani/splunk-app-action@v5
         with:
-          app_dir: ControlPane
+          app_dir: "."
           local_app_inspect: true
