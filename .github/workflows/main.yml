@@ -1,13 +1,4 @@
-name: Build with Local Inspect
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-
-      - uses: VatsalJagani/splunk-app-action@v5
-        with:
-          app_dir: "."
-          local_app_inspect: true
+# Basic build generation
+- uses: VatsalJagani/splunk-app-action@v5
+  with:
+    app_dir: "my_app"
