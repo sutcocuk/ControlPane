@@ -1,4 +1,14 @@
-# Basic build generation
-- uses: VatsalJagani/splunk-app-action@v5
-  with:
-    app_dir: "my_app"
+name: Basic build generation
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: VatsalJagani/splunk-app-action@v5
+        with:
+          app_dir: "."
